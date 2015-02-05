@@ -7,7 +7,9 @@
  * Free to use and abuse under the MIT license.
  * https://raw.githubusercontent.com/gilbitron/Ideal-Image-Slider/master/LICENSE
  */
-
+body{
+	background-color: #F0FFFF;
+}
 .ideal-image-slider {
 	position: relative;
 	overflow: hidden;
@@ -34,7 +36,7 @@
 	margin: 20px auto;
 }
 #slider a{
-	background-size: auto 800px;
+	background-size: auto 700px;
 }
 /* Slide effect */
 .iis-effect-slide .iis-slide {
@@ -91,6 +93,7 @@
 	z-index: 1;
 }
 #keyMsg{
+	text-align: center;
 	margin-left:0 auto;
 	margin-right: 0 auto;
 	font-family: verdana;
