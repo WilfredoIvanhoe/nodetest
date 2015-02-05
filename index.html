@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Linkin Park - Crawling</title>
-    <link href="1/js-image-slider.css" rel="stylesheet" type="text/css" />
-    <script src="1/js-image-slider.js" type="text/javascript"></script>
-    <link href="generic.css" rel="stylesheet" type="text/css" />
+    <link href="ideal-image-slider.css" rel="stylesheet" type="text/css" />
+    <script src="ideal-image-slider.js" type="text/javascript"></script>
+    <script src="iis-bullet-nav.js"></script>
 </head>
 <script type="text/javascript">
     function addImgs(){
@@ -18,20 +18,25 @@
             imgArray.img.push({"link":"http://"+stringImgArray[i]});
             var imgDOM=document.createElement("img");
             imgDOM.src=imgArray.img[i].link;
+            imgDOM.style.maxHeight="400px";
             sliderDiv.appendChild(imgDOM);
+            //document.getElementById("div2").appendChild(imgDOM);
         }
+
+        var slider = new IdealImageSlider.Slider('#slider');
+        slider.start();    
+
     }
 </script>
 <body onload='addImgs()' content="text/html">
-    <div id="sliderFrame">
-        <div id="slider">
-        </div>
-        <div id="htmlcaption" style="display: none;">
-                        <em>HTML</em> caption. Link to <a href="http://www.google.com/">Google</a>.
-        </div>
+    <div>
+        <div id="slider">div>
     </div>
 
-    <div class="div2">
+    <div class="div2" id="div2">
+        <div>
+            <h1 id="keyMsg">Utilice las de dirección para navegar por la galeria</h1>
+        </div>
         <div style="text-align:justify;width:900px;margin:0 auto">
             What the fuck did you just fucking say about me, you little bitch?
             I’ll have you know I graduated top of my class in the Navy Seals,
