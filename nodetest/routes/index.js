@@ -10,7 +10,7 @@ var Numbs= mongoose.model('Numbers',numbSchema);
 //mongoose.model('Mydb',{x:String});
 router.get('/', function(req, res, next) {
 
-  mongoose.connect('mongodb://localhost/lucy');
+  mongoose.connect('mongodb://wilfredoivanhoe:chichicuilote05@ds045057.mongolab.com:45057/wilfredoivanhoe');
   var numb=new Numbs({
   	x:43
   });
