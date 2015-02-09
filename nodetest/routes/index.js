@@ -1,33 +1,32 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var Schema=mongoose.Schema;
+var numbSchema=new Schema({
+  x:Number
+});
+var Numbs= mongoose.model('Numbers',numbSchema);
 /* GET home page. */
 //mongoose.model('Mydb',{x:String});
 router.get('/', function(req, res, next) {
-  /**
-  mongoose.model('Mydb').find(function(err,objects){
-    
-    res.send(objects);
-  	//res.render('index', { 'title': 'Lucy the cat' , 'objects': obj});
-  	mongoose.disconnect();
-  });**/
-mongoose.connect('mongodb://localhost/mydb');
 
-var numberSchema = new Schema({
-	x: String
-});
-var Numbers= new mongoose.model('Numbers',numberSchema);
-  var number=new Numbers({
-  	x:'d'
+  mongoose.connect('mongodb://localhost/lucy');
+  var numb=new Numbs({
+  	x:43
   });
-  number.save(function(err,number){
+    numb.save(function(err,numb){
   	if(err){
-  		res.send(err);
+  		res.end(err);
+      console.log(err);
   		mongoose.disconnect();
   	}
-  	res.render('index', { 'title': 'Lucy the cat' , 'objects': number});
-  	mongoose.disconnect();
+  });
+  Numbs.find(function(err,objects){
+    if(err)
+      res.end(err);
+    //res.send(objects);
+    res.render('index', { 'title': 'Lucy the cat' , 'objects': objects});
+    mongoose.disconnect();
   });
 });
 
