@@ -4,11 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var galery = require('./routes/galery');
+var cube = require('./routes/cube');
 var app = express();
 
 // view engine setup
@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/galery',galery);
-
+app.use('/cube',cube);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
