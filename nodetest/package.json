@@ -1,8 +1,10 @@
 {
   "name": "lucy",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Lucy Page",
   "private": true,
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www"
   },
   "dependencies": {
@@ -14,5 +16,15 @@
     "mongoose": "^3.8.23",
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WilfredoIvanhoe/nodetest"
+  },
+  "author": "Jorge Padilla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WilfredoIvanhoe/nodetest/issues"
+  },
+  "homepage": "https://github.com/WilfredoIvanhoe/nodetest"
 }
