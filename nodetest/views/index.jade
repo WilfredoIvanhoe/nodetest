@@ -3,9 +3,11 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  div hola
-  div #{objects}
-  table
-   tr
-    td ocho
-    td sos
+  div(style='font-size:30px')
+   ul
+    li 
+     a(href='/users') Users
+    li 
+     a(href='/galery') Galeria
+    li
+     a(href='/cube') Cubo
