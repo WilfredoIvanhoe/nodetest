@@ -1,0 +1,83 @@
+<html>
+	<head>
+		<title>Testing Layers</title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="catalog.css">
+	<body>
+	<div id='canvas-container'>
+		<div id='menuWrapper'>
+			<li>
+				<ul>
+				<ul>
+			</li>
+		</div>
+		<div  id="canvasWrapper">
+			<canvas id='canvas' height='800px'></canvas>
+		</div>
+	</div>
+	</body>
+	<script type="text/javascript">
+		window.addEventListener('resize',function(){
+			document.getElementById('canvas').width=document.getElementById('canvasWrapper').offsetWidth;
+		});
+	</script>
+	<script type="text/javascript">
+	drawOnCanvas();
+	function getArrays(name,type){
+		switch (type){
+		/**
+		*Aqui va la lógica de la base de datos por la verga por ahora
+		*
+		**/
+			case 'parent':
+				var imgArray ={
+					'img':[
+					{'ObjectID':'ObjectID', name : 'grumpy_cartoon_lucy', 'url' : 'lucy_alpha.png' }
+					]
+				}
+				return  imgArray;
+				break;
+			case 'child':
+				var imgArray ={
+					'img':[
+					{'ObjectID':'ObjectID', name : 'grumpy_cartoon_lucy', 'url' : 'lucy_alpha.png' }
+					]
+				}
+				return  imgArray;
+				break;
+			case 'texture':
+				var imgArray ={
+					'img':[
+					{'ObjectID':'ObjectID', name : 'grumpy_cartoon_lucy', 'url' : 'mota.jpg' }
+					]
+				}
+				return  imgArray;
+				break;			
+			default:
+				return null;
+		}
+	}
+	function drawOnCanvas (name,type) {
+		var imgArray(name,type);
+		var ctx=document.getElementById('canvas').getContext('2d');
+		drawImages(imgArray,ctx,0);
+		
+	}
+	function drawImages(imgArray,ctx,i){
+		var end=i;
+		if(end===imgArray.img.length)
+				return;
+		var img=new Image();
+		img.src=imgArray.img[end].link;
+		img.onload=function(){
+			ctx.drawImage(img,0,0);
+			console.log("Drew img: "+imgArray.img[end].link);
+			end++;
+			drawImage(imgArray,ctx,end);
+		};
+	}
+	function scaleToMain(){
+		
+	}
+	</script>
+</html>

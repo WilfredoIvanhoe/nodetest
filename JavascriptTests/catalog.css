@@ -1,0 +1,27 @@
+@charset 'utf-8'
+body{
+    background-color: #F0FFFF;
+}
+#canvas-container{
+	padding: 15px;
+}
+#menuWrapper{
+	width: 20%;
+	float: left;
+	position: relative;
+	height: 800px;
+	background-color: #FFBDFC;
+}
+#canvasWrapper{
+	position: relative;
+	width: 80%;
+	float: right;
+}
+#canvasWrapper * >{
+	position: absolute;
+
+}
+#canvas{
+	background-color: #93C7C8;
+	width: auto;
+}
