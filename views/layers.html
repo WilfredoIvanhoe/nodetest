@@ -1,84 +1,111 @@
 <html>
-	<head>
-		<title>Tests</title>
-	</head>
-	<link rel="stylesheet" type="text/css" href="catalog-style.css">
-	<body>
-		<div id='container-catalog'>
-			<div id='wrapper-menu'>
-				<div id='wrapper-objects'>
-					<h2>Objetos</h2>
-					<ul id='objects'>
-						<li>
-							<a href="#" id='grumpy_lucy'>Grumpy lucy</a>
-						</li>
-					</ul>
-				</div>
+  <head>
+    <title>Tests</title>
+  </head>
+  <link rel="stylesheet" type="text/css" href="catalog-style.css">
+  <body>
+    <div id='container-catalog'>
+      <div id='wrapper-menu'>
+        <div id='wrapper-objects'>
+          <h2>Objetos</h2>
+          <ul id='objects'>
+            <li>
+              <a href="#" id='grumpy_lucy'>Grumpy lucy</a>
+            </li>
+          </ul>
+        </div>
 
-				<ul id='child-objects'>
-					<li>
+        <ul id='child-objects'>
+          <li>
 
-					</li>
-				</ul>
-				<ul>
-					<li id='textures'>
+          </li>
+        </ul>
+        <ul>
+          <li id='textures'>
 
-					</li>
-				</ul>
-			</div>
-			<div id='wrapper-canvas'>
-				<canvas id='canvas'> </canvas>
-			</div>
-		</div>	
-	</body>
-	<script type="text/javascript">
-		window.addEventListener('resize',function(){
-			document.getElementById('canvas').width=document.getElementById('wrapper-canvas').offsetWidth;		
-		});
-
-	</script>
-	<script type="text/javascript">
-		function loadListsObjects(parentName){
-			var objects=document.getElementById('objects');
-			var childs=document.getElementById('child-objects');
-			var textures=document.getElementById('textures');
-
-			/**Database logic
-			*
-			*nwn
-			*	
-			**/
-
-		}
-		function getArrays(parentName){
-			/**Database logic
-			*
-			*kawaii
-			*	
-			**/
-			var arrayOfArrays=[];
-			//MODO TEMPORAL
-			switch(parentName){
-				case 'grumpy_lucy':
-					arrayOfArrays[0]={
-						'img':[
-							{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : './lucy_alpha.png' }
-						],
-						'storeData':[
-							{'ObjectID':'ObjectID', 'name':'String', 'barcode' : 'String', 'price': 'float'}
-						]
-					};
-					arrayOfArrays[1]=undefined;
-					arrayOfArrays[2]={
-						'img':[
-							{'ObjectID':'ObjectID', 'name' : 'mota', 'url': './mota.jpg', 'parent' : 'grumpy_lucy'}
-						]
-					};
-					break;
-			}
-		}
-		function drawOnCanvas(imgsArrays){
-			for(var i=0;i<imgsArrays.length;i++){}
-		}
-	</script>	
+          </li>
+        </ul>
+      </div>
+      <div id='wrapper-canvas'>
+        <canvas id='canvas'> </canvas>
+      </div>
+    </div>  
+  </body>
+  <script type="text/javascript">
+    document.body.onload=function(){
+      var arrayOfArrays= getArrays('grumpy_lucy');
+      var src = arrayOfArrays[0].img[0].url;
+      var texture = arrayOfArrays[2].img[0].url;
+      drawOnCanvas(texture);
+      console.log('Drew: '+texture);
+      drawOnCanvas(src);
+      console.log('Drew: '+src);
+    };
+    window.addEventListener('resize',function(){
+      document.getElementById('canvas').width=document.getElementById('wrapper-canvas').offsetWidth;    
+    });
+  </script>
+  <script type="text/javascript">
+    function loadListsObjects(parentName){
+      var objects=document.getElementById('objects');
+      var childs=document.getElementById('child-objects');
+      var textures=document.getElementById('textures');
+      /**Database logic
+      *
+      *nwn
+      * 
+      **/
+    }
+    function getArrays(parentName){
+      /**Database logic
+      *
+      *kawaii
+      * 
+      **/
+      var arrayOfArrays=[];
+      //MODO TEMPORAL
+      switch(parentName){
+        case 'grumpy_lucy':
+          arrayOfArrays[0]={
+            'img':[
+              {'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : './lucy_alpha.png' }
+            ],
+            'storeData':[
+              {'ObjectID':'ObjectID', 'name':'String', 'barcode' : 'String', 'price': 'float'}
+            ]
+          };
+          arrayOfArrays[1]=undefined;
+          arrayOfArrays[2]={
+            'img':[
+              {'ObjectID':'ObjectID', 'name' : 'mota', 'url': './mota.jpg', 'parent' : 'grumpy_lucy'}
+            ]
+          };
+          return arrayOfArrays;
+          break;
+      }
+    }
+    function drawOnCanvas(src){
+      ctx=document.getElementById('canvas').getContext("2d");
+      var img = new Image();
+      var canvas=document.getElementById('canvas');
+      img.src=src;
+      img.onload=function(){
+        if(this.width > canvas.offsetWidth){
+          console.log('More width');
+          ctx.drawImage(img,0,0,,canvas.offsetHeight);
+          return;
+        }
+        if(this.height > canvas.offsetWidth){
+          console.log('More height');
+          ctx.drawImage(img,0,0);
+          //canvas.offsetWidth,(this.height / (this.width * canvas.offsetwidth))
+          return;
+        }
+        else {
+          ctx.drawImage(img,0,0,this.width,this.height);
+        }
+        //ctx.drawImage(img,0,0);
+      }
+    }
+  </script> 
 </html>
