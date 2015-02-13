@@ -19,3 +19,7 @@
 #wrapper-canvas > *{
 	position:absolute;
 }
+#canvas {
+	width: 100%;
+	height: 100%;
+}
