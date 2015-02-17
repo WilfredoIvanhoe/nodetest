@@ -52,7 +52,7 @@
 			**/
 
 		}
-		function createCanvas(){
+		function createCanvas(objects){
 
 		}
 		function getArrays(parentName){
@@ -61,17 +61,12 @@
 			*kawaii
 			*	
 			**/
-			var arrayOfArrays=[];
+			var furniture={};
 			//MODO TEMPORAL
 			var parentArray={
-				'img':[
-					{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : './lucy_alpha.png' , 'z_index':0}
-				],
-				'storeData':[
-					{'ObjectID':'ObjectID', 'name':'String', 'barcode' : 'String', 'price': 'float','description':'descripcion'}
-				]
+				'img':{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : './lucy_alpha.png' , 'z_index':0},
+				'storeData':{'ObjectID':'ObjectID', 'name':'String', 'barcode' : 'String', 'price': 'float','description':'descripcion'}
 			};
-			arrayOfArrays[2]={};
 			var childArray={};
 			var texturesArray={				
 				'img':[
@@ -80,7 +75,12 @@
 			};
 			switch(parentName){
 				case 'grumpy_lucy':
-					arrayOfArrays[0]=
+					furniture={
+						'parent':{parent.},
+						'objects':[
+							{}
+						]
+					};
 					return arrayOfArrays;
 					break;
 			}
