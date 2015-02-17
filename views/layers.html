@@ -63,22 +63,24 @@
 			**/
 			var arrayOfArrays=[];
 			//MODO TEMPORAL
+			var parentArray={
+				'img':[
+					{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : './lucy_alpha.png' , 'z_index':0}
+				],
+				'storeData':[
+					{'ObjectID':'ObjectID', 'name':'String', 'barcode' : 'String', 'price': 'float','description':'descripcion'}
+				]
+			};
+			arrayOfArrays[2]={};
+			var childArray={};
+			var texturesArray={				
+				'img':[
+					{'ObjectID':'ObjectID', 'name' : 'mota', 'url': './mota.jpg', 'parent' : 'grumpy_lucy'}
+				]
+			};
 			switch(parentName){
 				case 'grumpy_lucy':
-					arrayOfArrays[0]={
-						'img':[
-							{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : './lucy_alpha.png' , 'z_index':0}
-						],
-						'storeData':[
-							{'ObjectID':'ObjectID', 'name':'String', 'barcode' : 'String', 'price': 'float'}
-						]
-					};
-					arrayOfArrays[1]=undefined;
-					arrayOfArrays[2]={
-						'img':[
-							{'ObjectID':'ObjectID', 'name' : 'mota', 'url': './mota.jpg', 'parent' : 'grumpy_lucy'}
-						]
-					};
+					arrayOfArrays[0]=
 					return arrayOfArrays;
 					break;
 			}
