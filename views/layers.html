@@ -2,7 +2,7 @@
 	<head>
 		<title>Tests</title>
 	</head>
-	<link rel="stylesheet" type="text/css" href="catalog-style.css">
+	<link rel="stylesheet" type="text/css" href="http://wilfredoivanhoe.github.io/nodetest/views/catalog-style.css">
 	<body>
 		<div id='container-catalog'>
 			<div id='wrapper-menu'>
@@ -34,11 +34,13 @@
 	<script type="text/javascript">
 		window.addEventListener('resize',function(){
 			document.getElementById('canvas').width=document.getElementById('wrapper-canvas').offsetWidth;		
-		});
+		})
+		var arrayOfArrays=getArrays();
+		drawOnCanvas();
 
 	</script>
 	<script type="text/javascript">
-		function loadListsObjects(parentName){
+		function loadObjects(parentName){
 			var objects=document.getElementById('objects');
 			var childs=document.getElementById('child-objects');
 			var textures=document.getElementById('textures');
@@ -48,6 +50,9 @@
 			*nwn
 			*	
 			**/
+
+		}
+		function createCanvas(){
 
 		}
 		function getArrays(parentName){
@@ -62,7 +67,7 @@
 				case 'grumpy_lucy':
 					arrayOfArrays[0]={
 						'img':[
-							{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : './lucy_alpha.png' }
+							{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : './lucy_alpha.png' , 'z_index':0}
 						],
 						'storeData':[
 							{'ObjectID':'ObjectID', 'name':'String', 'barcode' : 'String', 'price': 'float'}
@@ -74,11 +79,26 @@
 							{'ObjectID':'ObjectID', 'name' : 'mota', 'url': './mota.jpg', 'parent' : 'grumpy_lucy'}
 						]
 					};
+					return arrayOfArrays;
 					break;
 			}
 		}
-		function drawOnCanvas(imgsArrays){
-			for(var i=0;i<imgsArrays.length;i++){}
+		function drawObject(object){
+			var img=new Image();
+			img.src=imgArray.img[end].link;
+			img.onload=function(){
+				ctx.drawImage(img,0,0);
+				console.log("Drew img: "+imgArray.img[end].link);
+				end++;
+				drawImage(imgArray,ctx,end);
+			};
 		}
+		function scaleParent(img,x,y){
+			for(var i=Math.max(img.width,img.height);i>=Math.max(1,2)){
+				img.width-=1;
+				img.height-=1;
+			}
+		}
+
 	</script>	
 </html>
