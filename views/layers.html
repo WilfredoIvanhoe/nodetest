@@ -32,14 +32,6 @@
 		</div>	
 	</body>
 	<script type="text/javascript">
-		window.addEventListener('resize',function(){
-			document.getElementById('canvas').width=document.getElementById('wrapper-canvas').offsetWidth;		
-		})
-		var arrayOfArrays=getArrays();
-		drawOnCanvas();
-
-	</script>
-	<script type="text/javascript">
 		function loadObjects(parentName){
 			var objects=document.getElementById('objects');
 			var childs=document.getElementById('child-objects');
@@ -65,7 +57,7 @@
 			//MODO TEMPORAL
 			var parentArray={
 				'img':{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : './lucy_alpha.png' , 'z_index':0},
-				'storeData':{'ObjectID':'ObjectID', 'name':'String', 'barcode' : 'String', 'price': 'float','description':'descripcion'}
+				'storeData':{'ObjectID':'ObjectID', 'name':'String', 'barcode' : 'String', 'price': 0.00,'description':'Descripción'}
 			};
 			var childArray={};
 			var texturesArray={				
@@ -76,12 +68,15 @@
 			switch(parentName){
 				case 'grumpy_lucy':
 					furniture={
-						'parent':{parent.},
+						'parent':{'ObjectID':parentArray.img.ObjectID,'name':parentArray.img.name, 'url':parentArray.img.url,'z_index':parentArray.img.z_index,'barcode':parentArray.storeData.barcode,'price':parentArray.img.price,'description':parentArray.storeData.description},
 						'objects':[
 							{}
+						],
+						'textures':[
+							{'ObjectID':texturesArray.img[0].ObjectID,'name':texturesArray.img[0].name,'url':texturesArray.img[0].url,'parent':texturesArray.img[0].parent}
 						]
 					};
-					return arrayOfArrays;
+					return furniture;
 					break;
 			}
 		}
@@ -96,11 +91,21 @@
 			};
 		}
 		function scaleParent(img,x,y){
-			for(var i=Math.max(img.width,img.height);i>=Math.max(1,2)){
+			for(var i=Math.max(img.width,img.height);i>=Math.max(x,y);i--){
 				img.width-=1;
 				img.height-=1;
 			}
+			return img;
 		}
 
 	</script>	
+	<script type="text/javascript">
+		window.addEventListener('resize',function(){
+			document.getElementById('canvas').width=document.getElementById('wrapper-canvas').offsetWidth;		
+		})
+		var furniture=getArrays('grumpy_lucy');
+		alert(JSON.stringify(furniture.parent));
+		alert(JSON.stringify(furniture.textures[0]));
+
+	</script>
 </html>
