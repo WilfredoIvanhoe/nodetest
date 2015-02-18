@@ -27,7 +27,6 @@
 				</ul>
 			</div>
 			<div id='wrapper-canvas'>
-				<canvas id='canvas'> </canvas>
 			</div>
 		</div>	
 	</body>
@@ -44,8 +43,13 @@
 			**/
 
 		}
-		function createCanvas(objects){
+		function createCanvas(furniture){
+			var wrapper=document.getElementById('wrapper-canvas');
+			var parentCanvas=document.createElement('canvas');
+			parentCanvas.id=furniture.parent.name;
+			wrapper.appendChild(parentCanvas);
 
+			//for(var i=0;i<furniture.textures.objects.length)
 		}
 		function getArrays(parentName){
 			/**Database logic
@@ -70,7 +74,6 @@
 					furniture={
 						'parent':{'ObjectID':parentArray.img.ObjectID,'name':parentArray.img.name, 'url':parentArray.img.url,'z_index':parentArray.img.z_index,'barcode':parentArray.storeData.barcode,'price':parentArray.img.price,'description':parentArray.storeData.description},
 						'objects':[
-							{}
 						],
 						'textures':[
 							{'ObjectID':texturesArray.img[0].ObjectID,'name':texturesArray.img[0].name,'url':texturesArray.img[0].url,'parent':texturesArray.img[0].parent}
@@ -90,7 +93,7 @@
 				drawImage(imgArray,ctx,end);
 			};
 		}
-		function scaleParent(img,x,y){
+		function scaleToParent(img,x,y){
 			for(var i=Math.max(img.width,img.height);i>=Math.max(x,y);i--){
 				img.width-=1;
 				img.height-=1;
@@ -101,11 +104,16 @@
 	</script>	
 	<script type="text/javascript">
 		window.addEventListener('resize',function(){
-			document.getElementById('canvas').width=document.getElementById('wrapper-canvas').offsetWidth;		
+			var wrapper=document.getElementById('wrapper-canvas');
+			var canvases=wrapper.getElementsByTagName('canvas');
+			for(var i=0;i<canvases.length;i++){
+				canvases[i].width=wrapper.offsetWidth;
+				canvases[i].height=wrapper.offsetHeight;
+			}
 		})
 		var furniture=getArrays('grumpy_lucy');
-		alert(JSON.stringify(furniture.parent));
-		alert(JSON.stringify(furniture.textures[0]));
+		//alert(JSON.stringify(furniture.objects.length));
+		createCanvas(furniture);
 
 	</script>
 </html>
