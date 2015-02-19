@@ -48,8 +48,11 @@
 			var parentCanvas=document.createElement('canvas');
 			parentCanvas.id=furniture.parent.name;
 			wrapper.appendChild(parentCanvas);
-
-			//for(var i=0;i<furniture.textures.objects.length)
+			var objects=[];
+			for(var i=0;i<furniture.textures.objects.length;i++){
+				objects[i]=document.createElement('canvas');
+				wrapper.appendChild(objects[i]);
+			}
 		}
 		function getArrays(parentName){
 			/**Database logic

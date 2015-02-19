@@ -17,11 +17,8 @@ body{
 	width: 80%;
 	float: right;
 }
-#canvasWrapper * >{
-	position: absolute;
-
-}
 #canvas{
 	background-color: #93C7C8;
-	width: auto;
+	width: 600px;
+	height: 800px;
 }

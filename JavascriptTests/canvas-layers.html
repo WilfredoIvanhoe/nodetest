@@ -12,72 +12,34 @@
 			</li>
 		</div>
 		<div  id="canvasWrapper">
-			<canvas id='canvas' height='800px'></canvas>
+			<canvas id='canvas'></canvas>
 		</div>
 	</div>
 	</body>
 	<script type="text/javascript">
-		window.addEventListener('resize',function(){
-			document.getElementById('canvas').width=document.getElementById('canvasWrapper').offsetWidth;
-		});
-	</script>
-	<script type="text/javascript">
-	drawOnCanvas();
-	function getArrays(name,type){
-		switch (type){
-		/**
-		*Aqui va la lógica de la base de datos por la verga por ahora
-		*
-		**/
-			case 'parent':
-				var imgArray ={
-					'img':[
-					{'ObjectID':'ObjectID', name : 'grumpy_cartoon_lucy', 'url' : 'lucy_alpha.png' }
-					]
-				}
-				return  imgArray;
-				break;
-			case 'child':
-				var imgArray ={
-					'img':[
-					{'ObjectID':'ObjectID', name : 'grumpy_cartoon_lucy', 'url' : 'lucy_alpha.png' }
-					]
-				}
-				return  imgArray;
-				break;
-			case 'texture':
-				var imgArray ={
-					'img':[
-					{'ObjectID':'ObjectID', name : 'grumpy_cartoon_lucy', 'url' : 'mota.jpg' }
-					]
-				}
-				return  imgArray;
-				break;			
-			default:
-				return null;
+		var can = document.getElementById('canvas');
+		var ctx = can.getContext('2d');
+		var texture = new Image();
+
+		texture.onload = function () {
+		    
+		    ctx.drawImage(texture, 0, 0);
+		    /*
+		    var imageObj = new Image();
+
+		    function drawPattern() {
+
+		        var pattern = ctx.createPattern(imageObj, "repeat");
+		        ctx.fillStyle = pattern;
+		        ctx.fill();
+		    }
+		    imageObj.onload = drawPattern;
+		    imageObj.src = "http://us.cdn2.123rf.com/168nwm/robertosch/robertosch1101/robertosch110100184/8546060-textura-transparente-de-cannabis-patron-abstracto-ilustracion-de-arte-vectorial.jpg"; //transparent png
+		    var arr = ctx.getImageData(200, 100, 1, 1).data;
+		    alert(arr[0] + '\n' + arr[1] + '\n' + arr[2] + '\n' + arr[3]);
+		    */
 		}
-	}
-	function drawOnCanvas (name,type) {
-		var imgArray(name,type);
-		var ctx=document.getElementById('canvas').getContext('2d');
-		drawImages(imgArray,ctx,0);
-		
-	}
-	function drawImages(imgArray,ctx,i){
-		var end=i;
-		if(end===imgArray.img.length)
-				return;
-		var img=new Image();
-		img.src=imgArray.img[end].link;
-		img.onload=function(){
-			ctx.drawImage(img,0,0);
-			console.log("Drew img: "+imgArray.img[end].link);
-			end++;
-			drawImage(imgArray,ctx,end);
-		};
-	}
-	function scaleToMain(){
-		
-	}
+		texture.src = 'http://i.imgur.com/JpCrx3g.png';
+		texture.crossOrigin = "Anonymous";
 	</script>
 </html>
