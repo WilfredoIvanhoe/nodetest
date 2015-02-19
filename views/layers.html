@@ -11,7 +11,7 @@
 					<h2>Objetos</h2>
 					<ul id='objects'>
 						<li>
-							<a href="#" id='grumpy_lucy'>Grumpy lucy</a>
+							<a href="#" value='grumpy_lucy'>Grumpy lucy</a>
 						</li>
 					</ul>
 				</div>
@@ -88,21 +88,21 @@
 					break;
 			}
 		}
+		function drawPattern(ctx,img,x,y,x1,y1){
+			console.log('drawing pattern');
+			var pattern=ctx.createPattern(img,'repeat');
+			ctx.rect(x1,y1,x,y);
+			ctx.fillStyle=pattern;
+			ctx.fill();
+		};
+		function drawImage(img){
+			img=scaleToParent(img,ctx.offsetWidth,ctx.offsetHeight);
+			ctx.drawImage(img,(ctx.offsetWidth-img.width)/2,(ctx.offsetHeight-img.height)/2);
+		};
 		function drawObject(imgObject){
 			//objectSchema ={canvasName:String,texture : Img, object : Img}//
 			console.log(imgObject.canvasName);
 			var ctx=document.getElementById(imgObject.canvasName).getContext("2d");
-
-			var drawPattern=function(img,x,y){
-				var pattern=ctx.createPattern(img,'repeat');
-				ctx.rect(0,0,x,y);
-				ctx.fillStyle=pattern;
-				ctx.fill();
-			};
-			var drawImage=function(img){
-				img=scaleToParent(img,ctx.offsetWidth,ctx.offsetHeight);
-				ctx.drawImage(img,(ctx.offsetWidth-img.width)/2,(ctx.offsetHeight-img.height)/2);
-			};
 
 			drawPattern(imgObject.texture,imgObject.object.width,imgObject.height.height);
 			drawImage(imgObject.object);
@@ -111,33 +111,63 @@
 			for(var i=Math.max(img.width,img.height);i>=Math.max(x,y);i--){
 				img.width-=1;
 				img.height-=1;
+					if(img.width<=x)
+						if(img.height<=y)
+							break;
 			}
+			console.log(Math.max(img.width,img.height));
+			console.log(Math.max(x,y));
+			console.log('x: '+img.width+" y:"+img.height);
 			return img;
 		}
 		function getImgObject(canvasName,textureUrl,objectUrl){
 			var imgObject={};
-			var texture=new Image();
-			var obj= new Image();
-			texture.src=textureUrl;
-			obj.src=objectUrl;	
-			function loadTexture(){
-				texture.onload=function(){
-					imgObject.texture=texture;
-				}
+			
+			imgObject.texture=function(){
+				var canvas=document.getElementById(canvasName);
+				var ctx=canvas.getContext('2d');
+
+				var texture=new Image();
+				texture.src=textureUrl;
+
+				var img = new Image();
+				img.src = objectUrl;
+
+				img.onload=function(){
+					texture.onload=function(){
+						img=scaleToParent(img,canvas.width,canvas.height);
+						drawPattern(ctx,texture,img.width,img.height,(canvas.width-img.width)/2,(canvas.height-img.height)/2);
+					};	
+				}; 
 			};
-			function loadObject(){
+
+			imgObject.object=function(){
+				var canvas=document.getElementById(canvasName);
+				var ctx=canvas.getContext('2d');
+
+				var obj= new Image();
+				obj.src=objectUrl;
 				obj.onload=function(){
-					imgObject.object=obj;
+					obj=scaleToParent(obj,canvas.width,canvas.height);
+					console.log('drawing img');
+					ctx.drawImage(obj,(canvas.width-obj.width)/2,(canvas.height-obj.height)/2);
 				}
 			}
 			imgObject.canvasName=canvasName;
-			loadTexture();
-			loadObject();
+			imgObject.method=function(){
+				alert('oyito del pito');
+			};
 			return (imgObject);
 		}
 
 	</script>	
 	<script type="text/javascript">
+		var furniture=getArrays('grumpy_lucy');
+		createCanvas(furniture);
+		var imgObject=getImgObject(furniture.parent.name,furniture.textures[0].url,furniture.parent.url);
+		
+		//imgObject.texture();
+		imgObject.object();
 		window.addEventListener('resize',function(){
 			var wrapper=document.getElementById('wrapper-canvas');
 			var canvases=wrapper.getElementsByTagName('canvas');
@@ -145,11 +175,9 @@
 				canvases[i].width=wrapper.offsetWidth;
 				canvases[i].height=wrapper.offsetHeight;
 			}
+
 		});
-		var furniture=getArrays('grumpy_lucy');
-		createCanvas(furniture);
-		var ImgObject=getImgObject(furniture.parent.name,furniture.textures[0].url,furniture.parent.url);
-		var ctx=document.getElementById('grumpy_lucy').getContext('2d');
-		drawObject(ImgObject);
+		//imgObject.method()
+		//drawObject(imgObject);
 	</script>
 </html>
