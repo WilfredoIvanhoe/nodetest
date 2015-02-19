@@ -87,24 +87,22 @@
 					break;
 			}
 		}
-		function drawObject(object){
-			//objectSchema ={canvasName:String,texture : Img, objectUrl : Img}//
-			var ctx=document.getElementById(object.canvasName).getContext('2d');
-			var texture=new Image();
+		function drawObject(imgObject){
+			//objectSchema ={canvasName:String,texture : Img, object : Img}//
+			var ctx=document.getElementById(imgObject.canvasName).getContext('2d');
 			var drawPattern=function(img,x,y){
 				var pattern=ctx.createPattern(img,'repeat');
 				ctx.rect(0,0,x,y);
 				ctx.fillStyle=pattern;
 				ctx.fill();
 			};
-			var pattern=
-			img.src=imgArray.img[end].link;
-			img.onload=function(){
-				ctx.drawImage(img,0,0);
-				console.log("Drew img: "+imgArray.img[end].link);
-				end++;
-				drawImage(imgArray,ctx,end);
+			var drawImage=function(img){
+				img=scaleToParent(img,ctx.offsetWidth,ctx.offsetHeight);
+				ctx.drawImage(img,(ctx.offsetWidth-img.width)/2,(ctx.offsetHeight-img.height)/2);
 			};
+
+			drawPattern(imgObject.texture,imgObject.object.width,imgObject.height.height);
+			drawPattern(imgObject.object);
 		}
 		function scaleToParent(img,x,y){
 			for(var i=Math.max(img.width,img.height);i>=Math.max(x,y);i--){
@@ -112,6 +110,22 @@
 				img.height-=1;
 			}
 			return img;
+		}
+		function getImgObject(canvasName,textureUrl,objectUrl,returnObject){
+			var imgObject={};
+			var texture=new Image();
+			texture.onload=function(){
+				imgObject.texture=texture;
+				var object= new Image();
+				object.onload=function(){
+					imgObject.object=object;
+				};
+				imgObject.canvasName=canvasName;
+				texture.src=textureUrl;
+				object.src=objectUrl;				
+			};
+
+
 		}
 
 	</script>	
@@ -125,8 +139,9 @@
 			}
 		});
 		var furniture=getArrays('grumpy_lucy');
-		//alert(JSON.stringify(furniture.objects.length));
 		createCanvas(furniture);
 
+		var obj=getImgObject(furniture.parent.name,furniture.textures[0].url,furniture.parent.url);
+		alert (obj.canvasName);
 	</script>
 </html>
