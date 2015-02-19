@@ -49,8 +49,9 @@
 			parentCanvas.id=furniture.parent.name;
 			wrapper.appendChild(parentCanvas);
 			var objects=[];
-			for(var i=0;i<furniture.textures.objects.length;i++){
+			for(var i=0;i<furniture.objects.length;i++){
 				objects[i]=document.createElement('canvas');
+				objects[i].id=furniture.objects[i].name;
 				wrapper.appendChild(objects[i]);
 			}
 		}
@@ -87,7 +88,16 @@
 			}
 		}
 		function drawObject(object){
-			var img=new Image();
+			//objectSchema ={canvasName:String,texture : Img, objectUrl : Img}//
+			var ctx=document.getElementById(object.canvasName).getContext('2d');
+			var texture=new Image();
+			var drawPattern=function(img,x,y){
+				var pattern=ctx.createPattern(img,'repeat');
+				ctx.rect(0,0,x,y);
+				ctx.fillStyle=pattern;
+				ctx.fill();
+			};
+			var pattern=
 			img.src=imgArray.img[end].link;
 			img.onload=function(){
 				ctx.drawImage(img,0,0);
@@ -113,7 +123,7 @@
 				canvases[i].width=wrapper.offsetWidth;
 				canvases[i].height=wrapper.offsetHeight;
 			}
-		})
+		});
 		var furniture=getArrays('grumpy_lucy');
 		//alert(JSON.stringify(furniture.objects.length));
 		createCanvas(furniture);
