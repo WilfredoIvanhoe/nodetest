@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<title>Tests</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=9">
 	</head>
 	<link rel="stylesheet" type="text/css" href="http://wilfredoivanhoe.github.io/nodetest/views/catalog-style.css">
 	<body>
@@ -89,7 +90,9 @@
 		}
 		function drawObject(imgObject){
 			//objectSchema ={canvasName:String,texture : Img, object : Img}//
-			var ctx=document.getElementById(imgObject.canvasName).getContext('2d');
+			console.log(imgObject.canvasName);
+			var ctx=document.getElementById(imgObject.canvasName).getContext("2d");
+
 			var drawPattern=function(img,x,y){
 				var pattern=ctx.createPattern(img,'repeat');
 				ctx.rect(0,0,x,y);
@@ -102,7 +105,7 @@
 			};
 
 			drawPattern(imgObject.texture,imgObject.object.width,imgObject.height.height);
-			drawPattern(imgObject.object);
+			drawImage(imgObject.object);
 		}
 		function scaleToParent(img,x,y){
 			for(var i=Math.max(img.width,img.height);i>=Math.max(x,y);i--){
@@ -111,21 +114,26 @@
 			}
 			return img;
 		}
-		function getImgObject(canvasName,textureUrl,objectUrl,returnObject){
+		function getImgObject(canvasName,textureUrl,objectUrl){
 			var imgObject={};
 			var texture=new Image();
-			texture.onload=function(){
-				imgObject.texture=texture;
-				var object= new Image();
-				object.onload=function(){
-					imgObject.object=object;
-				};
-				imgObject.canvasName=canvasName;
-				texture.src=textureUrl;
-				object.src=objectUrl;				
+			var obj= new Image();
+			texture.src=textureUrl;
+			obj.src=objectUrl;	
+			function loadTexture(){
+				texture.onload=function(){
+					imgObject.texture=texture;
+				}
 			};
-
-
+			function loadObject(){
+				obj.onload=function(){
+					imgObject.object=obj;
+				}
+			}
+			imgObject.canvasName=canvasName;
+			loadTexture();
+			loadObject();
+			return (imgObject);
 		}
 
 	</script>	
@@ -140,8 +148,8 @@
 		});
 		var furniture=getArrays('grumpy_lucy');
 		createCanvas(furniture);
-
-		var obj=getImgObject(furniture.parent.name,furniture.textures[0].url,furniture.parent.url);
-		alert (obj.canvasName);
+		var ImgObject=getImgObject(furniture.parent.name,furniture.textures[0].url,furniture.parent.url);
+		var ctx=document.getElementById('grumpy_lucy').getContext('2d');
+		drawObject(ImgObject);
 	</script>
 </html>
