@@ -2,29 +2,25 @@
 	<head>
 		<title>Tests</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=9">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	</head>
 	<link rel="stylesheet" type="text/css" href="http://wilfredoivanhoe.github.io/nodetest/views/catalog-style.css">
 	<body>
 		<div id='container-catalog'>
 			<div id='wrapper-menu'>
 				<div id='wrapper-objects'>
-					<h2>Objetos</h2>
+				<h2 style="text-align:center">Catálogo</h2>
 					<ul id='objects'>
-						<li>
-							<a href="#" value='grumpy_lucy'>Grumpy lucy</a>
-						</li>
+						Personajes
 					</ul>
 				</div>
 
 				<ul id='child-objects'>
-					<li>
+					Accesorios adicionales
 
-					</li>
 				</ul>
-				<ul>
-					<li id='textures'>
-
-					</li>
+				<ul id='textures'>
+					Texturas
 				</ul>
 			</div>
 			<div id='wrapper-canvas'>
@@ -68,10 +64,16 @@
 				'img':{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : './lucy_alpha.png' , 'z_index':0},
 				'storeData':{'ObjectID':'ObjectID', 'name':'String', 'barcode' : 'String', 'price': 0.00,'description':'Descripción'}
 			};
-			var childArray={};
+			var childArray={
+
+			};
 			var texturesArray={				
 				'img':[
-					{'ObjectID':'ObjectID', 'name' : 'mota', 'url': './mota.jpg', 'parent' : 'grumpy_lucy'}
+					{'ObjectID':'ObjectID', 'name' : 'mota', 'url': './mota.jpg', 'parent' : 'grumpy_lucy'},
+					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': './wood.jpg', 'parent' : 'grumpy_lucy'},
+					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': './stone.jpg', 'parent' : 'grumpy_lucy'},
+					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': './grass.jpg', 'parent' : 'grumpy_lucy'},
+					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': './vintage-flowers.jpg', 'parent' : 'grumpy_lucy'}
 				]
 			};
 			switch(parentName){
@@ -80,16 +82,13 @@
 						'parent':{'ObjectID':parentArray.img.ObjectID,'name':parentArray.img.name, 'url':parentArray.img.url,'z_index':parentArray.img.z_index,'barcode':parentArray.storeData.barcode,'price':parentArray.img.price,'description':parentArray.storeData.description},
 						'objects':[
 						],
-						'textures':[
-							{'ObjectID':texturesArray.img[0].ObjectID,'name':texturesArray.img[0].name,'url':texturesArray.img[0].url,'parent':texturesArray.img[0].parent}
-						]
+						'textures' : texturesArray.img
 					};
 					return furniture;
 					break;
 			}
 		}
-		function drawPattern(ctx,img,x,y,x1,y1){
-			console.log('drawing pattern');
+		function drawPattern(ctx,img,x1,y1,x,y){
 			var pattern=ctx.createPattern(img,'repeat');
 			ctx.rect(x1,y1,x,y);
 			ctx.fillStyle=pattern;
@@ -99,14 +98,6 @@
 			img=scaleToCanvas(img,ctx.offsetWidth,ctx.offsetHeight);
 			ctx.drawImage(img,(ctx.offsetWidth-img.width)/2,(ctx.offsetHeight-img.height)/2);
 		};
-		function drawObject(imgObject){
-			//objectSchema ={canvasName:String,texture : Img, object : Img}//
-			console.log(imgObject.canvasName);
-			var ctx=document.getElementById(imgObject.canvasName).getContext("2d");
-
-			drawPattern(imgObject.texture,imgObject.object.width,imgObject.object.height);
-			drawImage(imgObject.object);
-		}
 		function scaleToCanvas(img,x,y){
 			var xi=img.width;
 			var yi=img.height;
@@ -122,70 +113,50 @@
 					if(yi<=y)
 						break;
 			}
-			console.log('Img x= '+img.width);
-			console.log('Canvas x= '+x);
-			console.log('Canvas y= '+y);
-			console.log('x: '+xi+" y:"+yi);
 			return {'width':xi,'height':yi};
 		}
-		function getImgObject(canvasName,textureUrl,objectUrl){
+		function drawObject(canvasName,textureUrl,objectUrl){
 			var imgObject={};
+			var canvas=document.getElementById(canvasName);
+			var ctx=canvas.getContext('2d');
+
+			var img = new Image();
 			
-			imgObject.texture=function(){
-				var canvas=document.getElementById(canvasName);
-				var ctx=canvas.getContext('2d');
-
+			img.onload=function(){
+				var measures=scaleToCanvas(img,canvas.offsetWidth,canvas.offsetHeight);
 				var texture=new Image();
+			
+				texture.onload=function(){
+					drawPattern(ctx,texture,(canvas.offsetWidth/2-measures.width/2),(canvas.offsetHeight/2-measures.height/2),measures.width,measures.height);
+					ctx.drawImage(img,(canvas.width-measures.width)/2,(canvas.height-measures.height)/2,measures.width,measures.height);
+				};	
 				texture.src=textureUrl;
-
-				var img = new Image();
-				img.src = objectUrl;
-
-				img.onload=function(){
-					texture.onload=function(){
-						img=scaleToCanvas(img,canvas.height,canvas.height);
-						drawPattern(ctx,texture,img.width,img.height,(canvas.width-img.width)/2,(canvas.height-img.height)/2);
-					};	
-				}; 
-			};
-
-			imgObject.object=function(){
-				var canvas=document.getElementById(canvasName);
-				var ctx=canvas.getContext('2d');
-
-				var obj= new Image();
-				obj.src=objectUrl;
-				obj.onload=function(){
-					var measures=scaleToCanvas(obj,canvas.offsetWidth,canvas.offsetHeight);
-					console.log((canvas.offsetHeight-measures.height)/2);
-					console.log((canvas.offsetWidth-measures.width)/2);
-					console.log('drawing img');
-					ctx.drawImage(obj,(canvas.offsetWidth-measures.width)/2,(canvas.offsetHeight-measures.height)/2,measures.width,measures.height);
-				}
 			}
-			imgObject.canvasName=canvasName;
-			imgObject.method=function(){
-				alert('oyito del pito');
-			};
-			return (imgObject);
+			img.src = objectUrl;
 		}
 
 	</script>	
 	<script type="text/javascript">
+
 		var furniture=getArrays('grumpy_lucy');
 		createCanvas(furniture);
-		var imgObject=getImgObject(furniture.parent.name,furniture.textures[0].url,furniture.parent.url);
-		
-		//imgObject.texture();
-		imgObject.object();
+		var wrapper=document.getElementById('wrapper-canvas');
+		var canvases=wrapper.getElementsByTagName('canvas');
+		for(var i=0;i<canvases.length;i++){
+			canvases[i].width=wrapper.offsetWidth;
+			canvases[i].height=wrapper.offsetHeight;
+		}
+		drawObject(furniture.parent.name,furniture.textures[4].url,furniture.parent.url);
+
 		window.addEventListener('resize',function(){
+			var furniture=getArrays('grumpy_lucy');
 			var wrapper=document.getElementById('wrapper-canvas');
 			var canvases=wrapper.getElementsByTagName('canvas');
 			for(var i=0;i<canvases.length;i++){
 				canvases[i].width=wrapper.offsetWidth;
 				canvases[i].height=wrapper.offsetHeight;
 			}
-
+			drawObject(furniture.parent.name,furniture.textures[4].url,furniture.parent.url);
 		});
 		//imgObject.method()
 		//drawObject(imgObject);
