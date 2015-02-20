@@ -4,7 +4,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=9">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	</head>
-	<link rel="stylesheet" type="text/css" href="http://wilfredoivanhoe.github.io/nodetest/views/catalog-style.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/catalog-style.css">
 	<body>
 		<div id='container-catalog'>
 			<div id='wrapper-menu'>
@@ -30,9 +30,11 @@
 	<script type="text/javascript">
 		function loadObjects(parentName){
 			var objects=document.getElementById('objects');
-			var childs=document.getElementById('child-objects');
-			var textures=document.getElementById('textures');
+			var parents=getParents();
+			
+			for(var i=0;i<parents.length;i++){
 
+			}
 			/**Database logic
 			*
 			*nwn
@@ -52,6 +54,13 @@
 				wrapper.appendChild(objects[i]);
 			}
 		}
+		function getParents(){
+			return {
+				'parents':[
+					{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : '/images/lucy_alpha.png' ,'barcode' : 'String', 'price': 0.00,'description':'Descripción'}
+				]
+			};
+		}
 		function getArrays(parentName){
 			/**Database logic
 			*
@@ -61,7 +70,7 @@
 			var furniture={};
 			//MODO TEMPORAL
 			var parentArray={
-				'img':{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : './lucy_alpha.png' , 'z_index':0},
+				'img':{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : '/images/lucy_alpha.png' , 'z_index':0},
 				'storeData':{'ObjectID':'ObjectID', 'name':'String', 'barcode' : 'String', 'price': 0.00,'description':'Descripción'}
 			};
 			var childArray={
@@ -69,11 +78,11 @@
 			};
 			var texturesArray={				
 				'img':[
-					{'ObjectID':'ObjectID', 'name' : 'mota', 'url': './mota.jpg', 'parent' : 'grumpy_lucy'},
-					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': './wood.jpg', 'parent' : 'grumpy_lucy'},
-					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': './stone.jpg', 'parent' : 'grumpy_lucy'},
-					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': './grass.jpg', 'parent' : 'grumpy_lucy'},
-					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': './vintage-flowers.jpg', 'parent' : 'grumpy_lucy'}
+					{'ObjectID':'ObjectID', 'name' : 'mota', 'url': '/images/mota.jpg', 'parent' : 'grumpy_lucy'},
+					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': '/images/wood.jpg', 'parent' : 'grumpy_lucy'},
+					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': '/images/stone.jpg', 'parent' : 'grumpy_lucy'},
+					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': '/images/grass.jpg', 'parent' : 'grumpy_lucy'},
+					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': '/images/vintage-flowers.jpg', 'parent' : 'grumpy_lucy'}
 				]
 			};
 			switch(parentName){

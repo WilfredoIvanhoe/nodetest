@@ -9,6 +9,8 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var galery = require('./routes/galery');
 var cube = require('./routes/cube');
+//var images = require('./routes/images');
+
 var app = express();
 
 // view engine setup
@@ -27,6 +29,8 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/galery',galery);
 app.use('/cube',cube);
+//app.use('/images',images);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
