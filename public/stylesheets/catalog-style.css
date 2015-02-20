@@ -1,21 +1,351 @@
-@charset 'utf-8'
-#container-catalog{
+@font-face {
+	font-family: 'icomoon';
+	src:url('http://localhost:3000/fonts/icomoon.eot?-kcgr4g');
+	src:url('http://localhost:3000/fonts/icomoon.eot?#iefix-kcgr4g') format('embedded-opentype'),
+		url('http://localhost:3000/fonts/icomoon.woff?-kcgr4g') format('woff'),
+		url('http://localhost:3000/fonts/icomoon.ttf?-kcgr4g') format('truetype'),
+		url('http://localhost:3000/fonts/icomoon.svg?-kcgr4g#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-up:before {
+	content: "\ea41";
+}
+
+.icon-right:before {
+	content: "\ea42";
+}
+
+.icon-down:before {
+	content: "\ea20";
+}
+
+/*---------------------------------------------*/
+a
+{
+	color: #22BCE0;
+	text-decoration: none;
+}
+body
+{
+	background: #E2E2E2;
+	font-family: 'pen Sans', sans-serif;
+	font-size: 16px;
+	margin: 0;
+}
+footer
+{
+	background: #5A78D1;
+	border-top: 3px solid #7AB59C;
+	color: rgba(255,255,255,0.7);
+	padding: 1.5em;
+	text-align: center;
+	/*position: absolute;*/
 	width: 100%;
-	margin:20px;
+	bottom: 0;
+
+}
+footer p:first-child
+{	
+	margin-bottom: 0;
+}
+footer p:last-child
+{
+	margin-top: 0;
+}
+footer p:last-child:after
+{
+	content: " -";
+}
+footer p:last-child:before
+{
+	content: "- ";
+}
+header
+{
+	background: #5A78D1;
+	color: white;
+	overflow: hidden;
+	padding: 0em;
+	position: relative;
+    padding: .7em;
+}
+header figure
+{
+	float: left;
+}
+header h1
+{
+	font-size: 2em;
+	font-weight: normal;
+	padding-top:.3em; 
+	margin: 0em 1em 70px 0 0;
+}
+header #logo{
+	border-right: 1px solid white;
+	margin-right: 0.5em;
+}
+header #logo img
+{
+	padding-right: 0.5em;
+	margin-right: 0.5em;
+	width: 92px;}
+header #logo img:hover{
+	-webkit-transition:.5s;
+	-webkit-transform:rotate(360deg);
+	-moz-transition:.5s;
+	-moz-transform:rotate(360deg);
+	-o-transform:rotate(360deg);
+	-o-transition:.5s;
+	-ms-transform:rotate(360deg);
+	-ms-transition:.5s;
+}
+nav
+{
+	background: #7F9AE8;
+	position: relative;
+}
+nav ul
+{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+nav ul li
+{
+	display: inline-block;
+	margin: 0 0.5em 0 0;
+}
+nav ul li a
+{
+	color: white;
+	display: block;
+	padding: 0.5em;
+	text-decoration: none;
+}
+nav ul #Cotizar
+{
+	position: absolute;
+	right: 0;
+	top: -0.2em;
+}
+nav ul #Cotizar a
+{
+	background: #FF5722;
+	border-radius: 7px;
+	box-shadow: rgba(0,0,0,0.5) 6px 5px 20px;
+	font-style: italic;
+	padding: .7em .8em;
+	text-shadow: rgba(0,0,0,0.5) 2px 2px 5px;
+	text-decoration: none;
+}
+nav ul li a:hover{
+	-moz-transition:.2s;
+	-webkit-transition:.2s;
+	-ms-transition:.2s;
+	-o-transition:.2s;
+	-webkit-transform:scale(1.1);
+	border-radius: 0 0 5px 5px;
+	background: #5A78D1;
+}
+nav ul #Cotizar a:hover{
+	-moz-transition:.2s;
+	-webkit-transition:.2s;
+	-ms-transition:.2s;
+	-o-transition:.2s;
+	background: #FF5722;
+}
+
+#content
+{
+
+	background: #E6E6E6;
+	margin: 0 1em 2em 1em;
+	min-height: 128px;
+	position: relative;
+}
+#content h2{
+	padding-bottom: 1em;
+	text-align: center;
+	color: #7A7A7A;
+}
+
+#content h2:hover{
+	-moz-transition:.2s;
+	-webkit-transition:.2s;
+	-ms-transition:.2s;
+	-o-transition:.2s;
+	-webkit-transform:scale(1.2);
+}
+#content .cotizador .option
+{
+	background: #eee;
+	border-radius: 0px;
+	border: 1px solid rgba(96, 97, 98, 0.42);
+	font-color: #7A7A7B;
+}
+#content .cotizador .option p
+{
+	margin: 0;
+	padding: 1em 0 1em 1em;
+	color: #4a4a4a;
+}
+#content .cotizador .option:first-child
+{
+	background: #eee;
+	border-radius: 5px 5px 0 0;
+	border-top: 2px solid rgba(96, 97, 98, 0.42);
+}
+#content .cotizador .option:last-child
+{
+	background: #eee;
+	border-radius: 0 0 5px 5px;
+	border-bottom: 2px solid rgba(96, 97, 98, 0.42);
+}
+#content .item .imagen_item
+{
+	float: left;
+	margin: 0 0.5em 0 0;
+}
+#content .item .imagen_item img
+{
+	width: 96px;
+	min-height: 128px;
 }
 #wrapper-menu{
 	float: left;
-	height: 80%;
+	height: 100%;
 	width:20%;
 	background-color: #FFBAE9;
+	border:activeborder;
+	border-radius:20px; 
 }
 #wrapper-canvas{
-	float: right;
-	height: 80%;
-	width:80%;
-	background-color: #A7C0CD;
-	position:relative;
+	min-height: 600px;
+	max-height: 1000px;
+	height: auto;
+	width:100%;
+	background-color: #5a78d1;
+
+
 }
 #wrapper-canvas > canvas{
 	position:absolute;
+}
+.formulario{
+	padding: 1em;
+	text-align: right;
+	display: none;
+	background: #606162;
+}
+.formulario input{
+	border: 1px solid rgba(177,177,177,0.7);
+	border-radius: 5px;
+	padding: 0.2em 0.6em;
+}
+.formulario input[type="submit"]{
+	background: #22BCE0;
+	border: #22BCE0;
+	border-radius: 5px;
+	box-shadow: rgba(0,0,0,0.5) 6px 5px 20px;
+	font-style: italic;
+	text-shadow: rgba(0,0,0,0.5) 2px 2px 5px;
+	text-decoration: none;
+	color: white;
+}
+@media screen and (min-width: 200px){
+	header #logo img
+{
+	padding-right: 0.5em;
+	margin-right: 0.5em;
+	width: 52px;}
+    body{
+    font-size:12px;
+    }
+	nav ul li{
+		
+		margin: 0 0.2em 0 0;
+	}
+	nav ul li a{;
+		padding-right: .1em;
+}
+}
+@media screen and (min-width: 320){
+	header #logo img
+{
+	padding-right: 0.2em;
+	margin-right: 0.5em;
+	width: 65px;}
+    body{
+    font-size:13px;
+    }
+}
+@media screen and (min-width: 420px){
+	header h1
+{
+	font-size: 1.5em;
+	font-weight: normal;
+	margin: 0.7em 70px 0 0;
+}
+    body{
+    font-size:14px;
+    }
+    nav ul #Cotizar a
+{
+	
+	padding: 1em;
+}
+@media screen and (min-width: 520px){
+    body{
+    font-size:15px;    
+    }
+	nav ul li{
+		display: inline-block;
+		margin: 0 0.5em 0 0;
+	}
+	nav ul li a{;
+		padding-right: 1em;
+}
+@media screen and (min-width: 800px){
+    body{
+        font-size:16px;
+    }
+	nav ul li{
+		display: inline-block;
+		margin: 0 .5em 0 .5em;
+	}
+	nav ul li a{
+		padding: 1em;
+		padding-right: 3em;
+	}
+	#content{
+		overflow: hidden;
+	}
+	#content .item{
+		float: left;
+		width: 49%;
+	}
+	#content .item:nth-child(odd){
+		margin-right: 2%;
+	}
+}
+@media screen and (min-width: 890px){
+	nav ul li a{;
+		padding-right: 5em;
+	}
 }
