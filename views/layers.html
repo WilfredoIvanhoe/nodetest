@@ -28,19 +28,44 @@
 		</div>	
 	</body>
 	<script type="text/javascript">
-		function loadObjects(parentName){
+		function loadObjects(){
 			var objects=document.getElementById('objects');
 			var parents=getParents();
-			
-			for(var i=0;i<parents.length;i++){
-
+			var liParents=[];
+			for(var i=0;i<parents.parents.length;i++){
+				liParents[i]=document.createElement('li');
+				liParents[i].id='li_'+parents.parents[i].name;
+				liParents[i].value=parents.parents[i].name;
+				liParents[i].innerHTML=parents.parents[i].name;
+				liParents[i].onclick=ladrar;
+				objects.appendChild(liParents[i]);
 			}
-			/**Database logic
-			*
-			*nwn
-			*	
-			**/
 
+		}
+		function loadTextures(parentName){
+			var objects=document.getElementById('textures');
+			var parent=getArrays(parentName);
+			var textures=parent.textures;
+			var liTextures=[];
+			for (var i = 0; i < textures.length; i++) {
+				liTextures[i]=document.createElement('li');
+				liTextures[i].id=textures[i].name;
+				liTextures[i].dataset.parentName;
+				liTextures[i].dataset.parentName=parentName;
+				liTextures[i].dataset.parentUrl;
+				liTextures[i].dataset.parentUrl=parent.parent.url;
+				liTextures[i].dataset.textureName;
+				liTextures[i].dataset.textureName=textures[i].name;
+				liTextures[i].dataset.textureUrl;
+				liTextures[i].dataset.textureUrl=textures[i].url;
+				liTextures[i].innerHTML=textures[i].name;
+				liTextures[i].onclick=function(){drawObject(this.getAttribute('data-parent-name'),this.getAttribute('data-texture-url'),this.getAttribute('data-parent-url'))};
+				objects.appendChild(liTextures[i]);
+			};
+
+		}
+		function ladrar(){
+			alert('guau guau')
 		}
 		function createCanvas(furniture){
 			var wrapper=document.getElementById('wrapper-canvas');
@@ -55,6 +80,11 @@
 			}
 		}
 		function getParents(){
+			/**Database logic
+			*
+			*kawaii
+			*	
+			**/
 			return {
 				'parents':[
 					{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : '/images/lucy_alpha.png' ,'barcode' : 'String', 'price': 0.00,'description':'Descripción'}
@@ -69,29 +99,25 @@
 			**/
 			var furniture={};
 			//MODO TEMPORAL
-			var parentArray={
-				'img':{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : '/images/lucy_alpha.png' , 'z_index':0},
-				'storeData':{'ObjectID':'ObjectID', 'name':'String', 'barcode' : 'String', 'price': 0.00,'description':'Descripción'}
-			};
-			var childArray={
 
-			};
-			var texturesArray={				
-				'img':[
-					{'ObjectID':'ObjectID', 'name' : 'mota', 'url': '/images/mota.jpg', 'parent' : 'grumpy_lucy'},
-					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': '/images/wood.jpg', 'parent' : 'grumpy_lucy'},
-					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': '/images/stone.jpg', 'parent' : 'grumpy_lucy'},
-					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': '/images/grass.jpg', 'parent' : 'grumpy_lucy'},
-					{'ObjectID':'ObjectID', 'name' : 'madera', 'url': '/images/vintage-flowers.jpg', 'parent' : 'grumpy_lucy'}
-				]
-			};
 			switch(parentName){
 				case 'grumpy_lucy':
+					var parentArray={
+						'img':{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : '/images/lucy_alpha.png' , 'z_index':0},
+						'storeData':{'ObjectID':'ObjectID', 'name':'String', 'barcode' : 'String', 'price': 0.00,'description':'Descripción'}
+					};
+					var childsArray=[];
+					var texturesArray=[	
+							{'ObjectID':'ObjectID', 'name' : 'Mota', 'url': '/images/mota.jpg', 'parent' : 'grumpy_lucy'},
+							{'ObjectID':'ObjectID', 'name' : 'Madera', 'url': '/images/wood.jpg', 'parent' : 'grumpy_lucy'},
+							{'ObjectID':'ObjectID', 'name' : 'Piedra', 'url': '/images/stone.jpg', 'parent' : 'grumpy_lucy'},
+							{'ObjectID':'ObjectID', 'name' : 'Pasto', 'url': '/images/grass.jpg', 'parent' : 'grumpy_lucy'},
+							{'ObjectID':'ObjectID', 'name' : 'Flores', 'url': '/images/vintage-flowers.jpg', 'parent' : 'grumpy_lucy'}
+					];
 					furniture={
 						'parent':{'ObjectID':parentArray.img.ObjectID,'name':parentArray.img.name, 'url':parentArray.img.url,'z_index':parentArray.img.z_index,'barcode':parentArray.storeData.barcode,'price':parentArray.img.price,'description':parentArray.storeData.description},
-						'objects':[
-						],
-						'textures' : texturesArray.img
+						'objects':childsArray,
+						'textures' : texturesArray
 					};
 					return furniture;
 					break;
@@ -99,13 +125,10 @@
 		}
 		function drawPattern(ctx,img,x1,y1,x,y){
 			var pattern=ctx.createPattern(img,'repeat');
+			var pixels=[];
 			ctx.rect(x1,y1,x,y);
 			ctx.fillStyle=pattern;
 			ctx.fill();
-		};
-		function drawImage(img){
-			img=scaleToCanvas(img,ctx.offsetWidth,ctx.offsetHeight);
-			ctx.drawImage(img,(ctx.offsetWidth-img.width)/2,(ctx.offsetHeight-img.height)/2);
 		};
 		function scaleToCanvas(img,x,y){
 			var xi=img.width;
@@ -115,12 +138,9 @@
 					return {'width':xi,'height':yi};
 				}
 			}
-			while(true){
+			for(var i=Math.max(xi,yi);i>=Math.min(x,y);i--){
 				xi--;
 				yi--;
-				if(xi<=x)
-					if(yi<=y)
-						break;
 			}
 			return {'width':xi,'height':yi};
 		}
@@ -147,6 +167,9 @@
 	</script>	
 	<script type="text/javascript">
 
+		loadObjects();
+		loadTextures('grumpy_lucy');
+
 		var furniture=getArrays('grumpy_lucy');
 		createCanvas(furniture);
 		var wrapper=document.getElementById('wrapper-canvas');
@@ -167,7 +190,5 @@
 			}
 			drawObject(furniture.parent.name,furniture.textures[4].url,furniture.parent.url);
 		});
-		//imgObject.method()
-		//drawObject(imgObject);
 	</script>
 </html>
