@@ -16,10 +16,8 @@
 	background-color: #A7C0CD;
 	position:relative;
 }
-#wrapper-canvas > *{
-	position:absolute;
-}
 #wrapper-canvas > canvas{
+	position:absolute;
 	width: 100%;
 	height: 100%;	
 }
