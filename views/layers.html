@@ -66,12 +66,16 @@
 		var parents=getParents();
 		var liParents=[];
 		for(var i=0;i<parents.parents.length;i++){
-			liParents[i]=document.createElement('li');
-			liParents[i].id='li_'+parents.parents[i].name;
+			liParents[i]=document.createElement('input');
+			liParents[i].type='radio';
+			liParents[i].name='objects';
+			liParents[i].id='opc-'+parents.parents[i].name;
 			liParents[i].value=parents.parents[i].name;
-			liParents[i].innerHTML=parents.parents[i].name;
 			liParents[i].onclick=ladrar;
-			objects.appendChild(liParents[i]);
+			var div=document.createElement('div');
+			div.appendChild(liParents[i]);
+			div.innerHTML=div.innerHTML+" "+parents.parents[i].name;
+			objects.appendChild(div);
 		}
 
 	}
@@ -120,7 +124,8 @@
 		**/
 		return {
 			'parents':[
-				{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : '/images/lucy_alpha.png' ,'barcode' : 'String', 'price': 0.00,'description':'Descripción'}
+				{'ObjectID':'1', 'name' :'grumpy_lucy', 'url' : '/images/lucy_alpha.png' ,'barcode' : 'String', 'price': 0.00,'description':'Descripción'},
+				{'ObjectID':'1', 'name' :'bad_neko', 'url' : '/images/bad_neko.png' ,'barcode' : 'String', 'price': 0.00,'description':'Descripción'}
 			]
 		};
 	}
