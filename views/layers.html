@@ -5,7 +5,6 @@
 	<meta name="description" content="Proyecto de realizacion en diseño web"/>
 	<meta name="viewport" content="width=device-width, minimum-scale=1 maximum-scale=1"/>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="normalize.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/catalog-style.css">
 	<title>Cotizador web</title>
 </head>
@@ -71,11 +70,15 @@
 			liParents[i].name='objects';
 			liParents[i].id='opc-'+parents.parents[i].name;
 			liParents[i].value=parents.parents[i].name;
-			liParents[i].onchange=function(){ladrar()};
 			var div=document.createElement('div');
 			div.appendChild(liParents[i]);
 			div.innerHTML=div.innerHTML+" "+parents.parents[i].gName;
 			objects.appendChild(div);
+		}
+		console.log('created Radio buttons');
+		for(var i=0,elements=document.getElementsByName('objects');i<elements.length;i++){
+			elements[i].onclick=function(){console.log('d');ladrar()};
+
 		}
 
 	}
@@ -98,7 +101,7 @@
 			liTextures[i].dataset.textureUrl;
 			liTextures[i].dataset.textureUrl=textures[i].url;
 			liTextures[i].innerHTML=textures[i].name;
-			liTextures[i].onclick=function(){drawObject(this.getAttribute('data-parent-name'),this.getAttribute('data-texture-url'),this.getAttribute('data-parent-url'))};
+			liTextures[i].onchange=function(){drawObject(this.getAttribute('data-parent-name'),this.getAttribute('data-texture-url'),this.getAttribute('data-parent-url'))};
 			var div=document.createElement('div');
 			div.appendChild(liTextures[i]);
 			div.innerHTML=div.innerHTML+" "+textures[i].name;
