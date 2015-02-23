@@ -4,8 +4,7 @@
 	<meta charset="utf-8"/>
 	<meta name="description" content="Proyecto de realizacion en diseño web"/>
 	<meta name="viewport" content="width=device-width, minimum-scale=1 maximum-scale=1"/>
-	<script type="text/javascript" src="/javascripts/catalog.js"></script>	
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/catalog-style.css">
 	<title>Cotizador web</title>
 </head>
@@ -60,4 +59,30 @@
 		<p>Desarrollado por Developsoft</p>
 	</footer>
 </body>
+<script type="text/javascript" src="/javascripts/catalog.js"></script>	
+<script type="text/javascript">
+window.addEventListener('resize',function(){
+	var rates = document.getElementsByName('objects');
+	var obj_name;
+	for(var i = 0; i < rates.length; i++){
+	    if(rates[i].checked){
+	        obj_name = rates[i].getAttribute('data-name');
+	    }
+	}
+	if (obj_name===undefined)
+		return;
+	console.log(obj_name);
+	var furniture=getArrays(obj_name);
+	var wrapper=document.getElementById('wrapper-canvas');
+	var canvases=wrapper.getElementsByTagName('canvas');
+	for(var i=0;i<canvases.length;i++){
+		canvases[i].width=wrapper.offsetWidth;
+		canvases[i].height=wrapper.offsetHeight;
+	}
+	drawObject(furniture.parent.name,furniture.textures[0].url,furniture.parent.url);
+});	
+document.body.onload=function(){
+	loadObjects();
+};
+</script>
 </html>
