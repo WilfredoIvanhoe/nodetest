@@ -115,7 +115,7 @@
 				var texturesArray=[	
 						{'ObjectID':'ObjectID', 'name' : 'Mota', 'url': '/images/mota.jpg', 'parent' : 'grumpy_lucy','price':0.0},
 						{'ObjectID':'ObjectID', 'name' : 'Madera', 'url': '/images/wood.jpg', 'parent' : 'grumpy_lucy'},
-						{'ObjectID':'ObjectID', 'name' : 'Piedra', 'url': '/images/stone.jpg', 'parent' : 'grumpy_lucy'},
+						{'ObjectID':'ObjectID', 'name' : 'Piedra', 'url': '/images/stone.JPG', 'parent' : 'grumpy_lucy'},
 						{'ObjectID':'ObjectID', 'name' : 'Pasto', 'url': '/images/grass.jpg', 'parent' : 'grumpy_lucy'},
 						{'ObjectID':'ObjectID', 'name' : 'Flores', 'url': '/images/vintage-flowers.jpg', 'parent' : 'grumpy_lucy'}
 				];
@@ -137,7 +137,7 @@
 				var texturesArray=[	
 						{'ObjectID':'ObjectID', 'name' : 'Mota', 'url': '/images/mota.jpg', 'parent' : 'bad_neko'},
 						{'ObjectID':'ObjectID', 'name' : 'Madera', 'url': '/images/wood.jpg', 'parent' : 'bad_neko'},
-						{'ObjectID':'ObjectID', 'name' : 'Piedra', 'url': '/images/stone.jpg', 'parent' : 'bad_neko'},
+						{'ObjectID':'ObjectID', 'name' : 'Piedra', 'url': '/images/stone.JPG', 'parent' : 'bad_neko'},
 						{'ObjectID':'ObjectID', 'name' : 'Pasto', 'url': '/images/grass.jpg', 'parent' : 'bad_neko'},
 						{'ObjectID':'ObjectID', 'name' : 'Flores', 'url': '/images/vintage-flowers.jpg', 'parent' : 'bad_neko'}
 				];
