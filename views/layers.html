@@ -61,6 +61,9 @@
 </body>
 <script type="text/javascript" src="/javascripts/catalog.js"></script>	
 <script type="text/javascript">
+document.body.onload=function(){
+	loadObjects();
+};
 window.addEventListener('resize',function(){
 	var rates = document.getElementsByName('objects');
 	var obj_name;
@@ -81,8 +84,5 @@ window.addEventListener('resize',function(){
 	}
 	drawObject(furniture.parent.name,furniture.textures[0].url,furniture.parent.url);
 });	
-document.body.onload=function(){
-	loadObjects();
-};
 </script>
 </html>
