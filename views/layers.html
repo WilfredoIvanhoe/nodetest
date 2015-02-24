@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, minimum-scale=1 maximum-scale=1"/>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/catalog-style.css">
+	<script src="http://parall.ax/parallax/js/jspdf.js"></script>
 	<title>Cotizador web</title>
 </head>
 <body>
@@ -47,7 +48,7 @@
 			</div>
 			<div class ="option">
 				<p class="icon-down"> Imprimir </p>
-				<ul></ul>
+				<input type="button" value="Imprimir" onclick="printImage();" id="print-button"> 
 			</div>
 			<div id='wrapper-canvas'></div>
 		</form>
@@ -276,6 +277,18 @@
 		}
 		alert('Precio total: '+price);
 		furniture,price=undefined;
+	}
+	function printImage(){
+		canvas=(document.getElementById('wrapper-canvas')).getElementsByTagName('canvas')[0];
+		if(canvas===undefined){
+			alert('Por favor elija alguno de nuestros productos');
+			return;
+		}
+		var imgData = canvas.toDataURL("image/jpeg", 1.0);
+      	var pdf = new jsPDF();
+
+      	pdf.addImage(imgData, 'JPEG', 0, 0);
+      	pdf.save(canvas.id+".pdf");
 	}
 </script>
 <script type="text/javascript">

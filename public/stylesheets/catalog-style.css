@@ -170,7 +170,17 @@ nav ul #Cotizar a:hover{
 	-o-transition:.2s;
 	background: #FF5722;
 }
+#print-button{
+	width: 124px;
+	height: 25px;
+	font-family:none;
+	font-size: medium;
+	text-align: center;
+	color: rgb(96, 97, 98);
+	background-color: transparent;
+	border: 3px solid rgb(96, 97, 98);
 
+}
 #content
 {
 
