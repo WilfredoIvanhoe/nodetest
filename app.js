@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var galery = require('./routes/galery');
 var cube = require('./routes/cube');
+var admin = require('./routes/admin');
 //var images = require('./routes/images');
 
 var app = express();
@@ -29,6 +30,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/galery',galery);
 app.use('/cube',cube);
+app.use('/admin',admin);
 //app.use('/images',images);
 
 // catch 404 and forward to error handler

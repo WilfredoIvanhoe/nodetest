@@ -359,3 +359,47 @@ nav ul #Cotizar a:hover{
 		padding-right: 5em;
 	}
 }
+#texto{
+    position: absolute;
+    background: #5a78d1;
+    border: activeborder;
+    font-family: sans-serif;
+    font-size: medium;
+    text-align: center;
+    color: #FFF;
+    font-style: italic;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px; 
+    border-style: solid;
+    border-width: 5px;
+    border-color: #FFF;
+    min-height: 250px;
+    min-width: 650px;
+    width: 40%;
+    height: auto;
+    margin-top: 13em;
+    margin-left: 33em;
+}
+.textarea{
+    width: 200px;
+    height: 20px;
+    background-color: transparent;
+    border: 3px solid #FFF;
+    margin: -2px 0 0 0;
+    border-radius: 5px;
+    padding: 0 5px;
+    alignment-adjust: central;
+}
+.buttons{
+    width: 125px;
+    height: 25px;
+    font-family: sans-serif;
+    font-size: medium;
+    text-align: center;
+    color: #FFF;
+    font-style: italic;
+    background-color: transparent;
+    border: 3px solid #FFF;
+    alignment-adjust: central;
+    alignment-baseline: central;
+}   
