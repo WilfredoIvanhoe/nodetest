@@ -5,7 +5,7 @@ var Schema=mongoose.Schema;
 var numbSchema=new Schema({
   x:Number
 });
-var Numbs= mongoose.model('Numbers',numbSchema);
+var Numbs= mongoose.model('numbers',numbSchema);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
