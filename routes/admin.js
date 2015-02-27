@@ -12,18 +12,19 @@ router.get('/login',function(req, res, next){
 	res.end();
 });
 router.post('/login',function(req, res, next){
-	var userName = request.body.userName;
-	var password = request.body.userPassword;
+	console.log("login")
 
-	if(userName = "admin" && password = "admin")
-		res.writeHead(301, {
-  			Location: '/admin/'
-		});
+	var userName = req.body.userName;
+	var password = req.body.userPassword;
+
+	if(userName == "admin" && password == "admin")
+		res.redirect('/admin/apanel')
 	else
-		res.writeHead(301, {
-  			Location: '/admin'
-		});
+		res.redirect('/admin')
 	
 });
-router.get(admin);
+router.get('/apanel', function (req,res){
+	res.render('apanel')
+});
+
 module.exports = router;
